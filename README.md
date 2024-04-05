@@ -1,8 +1,8 @@
 # Music Visualiser Project
 
-Name:
+Name: Michael O'Brien
 
-Student Number: 
+Student Number: C21502889
 
 ## Instructions
 - Fork this repository and use it a starter project for your assignment

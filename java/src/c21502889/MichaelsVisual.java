@@ -8,6 +8,7 @@ public class MichaelsVisual extends Visual
   public void settings() 
   {
     size(1024, 500);
+    
 
     // Use this to make fullscreen
     // fullScreen();
@@ -20,9 +21,10 @@ public class MichaelsVisual extends Visual
   public void setup() 
   {
     startMinim();
+    background(0);
 
     // Call loadAudio to load an audio file to process
-    // loadAudio("heroplanet.mp3");
+    loadAudio("EverythingInItsRightPlace.mp3");
 
   }//End setup
 
@@ -38,7 +40,7 @@ public class MichaelsVisual extends Visual
 
   public void draw ()
   {
-    
+
   }
 
 }// End MichaelsVisual

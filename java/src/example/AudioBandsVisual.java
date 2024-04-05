@@ -1,9 +1,9 @@
 package example;
 
-import processing.core.*;
+import processing.core.PApplet;
 
 // This is an example of a visual that uses the audio bands
-public class AudioBandsVisual
+public class AudioBandsVisual extends PApplet
 {
     MyVisual mv;
 

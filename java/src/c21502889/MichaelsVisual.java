@@ -51,6 +51,8 @@ public class MichaelsVisual extends Visual {
 
     rotateX(PI/3); // rotate view so that there is a bird's eye view of the terrain
 
+    translate(- width/2, - height/2); // translate again to mirror grid on left side of screen
+
     // Draw mesh with triangle strips
     for (int y = 0; y < rows; y++)
     {

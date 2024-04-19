@@ -1,6 +1,6 @@
 package c21502889;
 
-import processing.core.*;
+//import processing.core.*;
 import ie.tudublin.Visual;
 
 public class MichaelsVisual extends Visual {
@@ -45,6 +45,11 @@ public class MichaelsVisual extends Visual {
   }// End keyPressed
 
   public void draw() {
+
+    //Draw terrain relative to the centre of the window
+    translate(width/2, height/2);
+
+    rotateX(PI/3); // rotate view so that there is a bird's eye view of the terrain
 
     // Draw mesh with triangle strips
     for (int y = 0; y < rows; y++)

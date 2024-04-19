@@ -9,6 +9,8 @@ public class MichaelsVisual extends Visual {
   int height = 600; //Height of triangle mesh
   int scale = 20; //scale for the mesh
 
+  float [][] terrain; // create 2d array for terrain
+
   // Mesh rows and columns
   int cols = width / scale;
   int rows = height / scale;
@@ -30,6 +32,17 @@ public class MichaelsVisual extends Visual {
     background(0);
     stroke(100, 149, 237); // Set the stroke colour to blue
     noFill();
+
+    terrain = new float[cols][rows];  // initialise terrain array
+
+    // Create randoms heights for terrain peaks
+    for (int y = 0; y < rows; y++)
+    {
+      for (int x = 0; x < cols; x++)
+      {
+        terrain [x][y] = random (-10, 10);
+      }
+    }
 
     // Call loadAudio to load an audio file to process
     loadAudio("EverythingInItsRightPlace.mp3");
@@ -54,14 +67,14 @@ public class MichaelsVisual extends Visual {
     translate(- width/2, - height/2); // translate again to mirror grid on left side of screen
 
     // Draw mesh with triangle strips
-    for (int y = 0; y < rows; y++)
+    for (int y = 0; y < rows - 1; y++)
     {
       beginShape(TRIANGLE_STRIP);
 
       for (int x = 0; x < cols; x++)
       {
-        vertex (x * scale, y * scale);
-        vertex(x * scale, (y + 1) * scale);
+        vertex (x * scale, y * scale, terrain[x][y]);
+        vertex(x * scale, (y + 1) * scale, terrain[x][y + 1]);
       }
       endShape();
     }

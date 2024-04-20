@@ -30,9 +30,7 @@ public class MichaelsVisual extends Visual {
     stroke(100, 149, 237); // Set the stroke colour to blue
     noFill();
 
-    // Dynamically calculate scale
-    float aspectRatio = (float) width / height;
-    scale = max(width, height) / max(ceil(aspectRatio * 40), 40);
+    scale = 15; // Assign scale
 
     cols = width / scale + 50; // Number of columns based on the window width (added 50 to avoid gaps)
     rows = height / scale; // Number of rows based on the window height
@@ -76,7 +74,7 @@ public class MichaelsVisual extends Visual {
     background(0); // Clear the background
     translate(width / 2, height / 2 + 100); // Adjust to center terrain and move down slightly
     rotateX(PI / 3); // Bird's eye view
-    translate(-(cols - 1) * scale / 2, -(rows - 1) * scale / 2); // Center the grid on the screen
+    translate(-(cols - 1) * scale / 2, -(rows - 1) * scale / 2); // Center the terrain on the screen
 
     // Draw mesh with triangle strips
     for (int y = 0; y < rows - 1; y++) {

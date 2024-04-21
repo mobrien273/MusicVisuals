@@ -14,6 +14,8 @@ public class MichaelsVisual extends Visual {
   float previousAmplitude = 0; // Store previous frame's amplitude
   float colourChangeThreshold = 0.01f; // Threshold to reduce frequency of colour changes
 
+  float scroll = 0; // Variable for terrain scrolling
+
 
   public void settings() {
     size(800, 800, P3D);
@@ -30,7 +32,6 @@ public class MichaelsVisual extends Visual {
     startMinim();
     background(0);
     colorMode(HSB, 360, 100, 100); // Should give better range of colour
-    //stroke(100, 149, 237); // Set the stroke colour to blue
     noFill();
     
     scale = 15; // Assign scale
@@ -54,10 +55,13 @@ public class MichaelsVisual extends Visual {
 
   // Method for terrain generation using Perlin noise
   public void terrainGen() {
+
+    scroll -= 0.01; // Decrement scroll on each terrain generation so terrain appears to be moving
+
     terrain = new float[cols][rows]; // initialise terrain array
 
     float x_offset = 0; // offset values for Perlin noise
-    float y_offset = 0;
+    float y_offset = scroll;
 
     // Get amplitude data
     float amplitude = getAmplitude();

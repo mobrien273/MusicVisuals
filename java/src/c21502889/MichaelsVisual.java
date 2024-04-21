@@ -1,26 +1,28 @@
 package c21502889;
 
-//import processing.core.*;
 import ie.tudublin.Visual;
+import ie.tudublin.VisualException;
 
 public class MichaelsVisual extends Visual {
   int scale; // scale of terrain mesh
   float[][] terrain; // create 2d array for terrain
 
   // Mesh rows and columns
-  int cols; // = width / scale;
-  int rows; // = height / scale;
+  int cols;
+  int rows;
+
+  float previousAmplitude = 0; // Store previous frame's amplitude
+  float colourChangeThreshold = 0.01f; // Threshold to reduce frequency of colour changes
+
 
   public void settings() {
-    size(900, 900, P3D);
-
-    // fullScreen(P3D, 1);
+    size(800, 800, P3D);
 
     // Use this to make fullscreen
     // fullScreen();
 
     // Use this to make fullscreen and use P3D for 3D graphics
-    // fullScreen(P3D, SPAN);
+    fullScreen(P3D, SPAN);
 
   }// End settings
 
@@ -29,9 +31,8 @@ public class MichaelsVisual extends Visual {
     background(0);
     stroke(100, 149, 237); // Set the stroke colour to blue
     noFill();
-
+    
     scale = 15; // Assign scale
-
     cols = width / scale + 50; // Number of columns based on the window width (added 50 to avoid gaps)
     rows = height / scale; // Number of rows based on the window height
 
@@ -57,10 +58,15 @@ public class MichaelsVisual extends Visual {
     float x_offset = 0; // offset values for Perlin noise
     float y_offset = 0;
 
+    // Get amplitude data
+    float amplitude = getAmplitude();
+    amplitude = amplitude + super.getSmoothedAmplitude() * 600; //amplify amplitude
+
     // Create randoms heights for terrain peaks
     for (int y = 0; y < rows; y++) {
       for (int x = 0; x < cols; x++) {
-        terrain[x][y] = map(noise(x_offset, y_offset), 0, 1, -75, 75);
+        // Use the audio amplitude to modulate the height of the terrain
+        terrain[x][y] = map(noise(x_offset, y_offset), 0, 1, -75, 75) + amplitude;
         x_offset += 0.1;
       }
       y_offset += 0.1;
@@ -72,11 +78,36 @@ public class MichaelsVisual extends Visual {
   public void draw() {
 
     background(0); // Clear the background
+    //lights(); // Set the default lighting
+
+    // Perform FFT analysis
+    try{
+      calculateFFT();
+      calculateFrequencyBands(); 
+    } catch (VisualException e) {
+      System.err.println("Error: Failed to calculate FFT");
+      return;
+    }
+
+    // Update terrain based on the FFT analysis
+    calculateAverageAmplitude();
+    terrainGen(); // Modify terrain generation to respond to audio
+
     translate(width / 2, height / 2 + 100); // Adjust to center terrain and move down slightly
     rotateX(PI / 3); // Bird's eye view
     translate(-(cols - 1) * scale / 2, -(rows - 1) * scale / 2); // Center the terrain on the screen
 
-    // Draw mesh with triangle strips
+    // Update the colour only after significant amplitude change
+    float currentAmplitude = getSmoothedAmplitude() * 1000;
+    if (Math.abs(currentAmplitude - previousAmplitude) > colourChangeThreshold) {
+        previousAmplitude = currentAmplitude; 
+    }
+
+    // Define colour within blue to purple range
+    int colour = color(100 + previousAmplitude % 55, 50, 200 + previousAmplitude % 55);
+    stroke(colour); // Apply colour
+
+    // Draw terrain mesh with triangle strips
     for (int y = 0; y < rows - 1; y++) {
       beginShape(TRIANGLE_STRIP);
       for (int x = 0; x < cols; x++) {

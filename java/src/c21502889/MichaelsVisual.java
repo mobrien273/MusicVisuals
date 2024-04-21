@@ -29,7 +29,8 @@ public class MichaelsVisual extends Visual {
   public void setup() {
     startMinim();
     background(0);
-    stroke(100, 149, 237); // Set the stroke colour to blue
+    colorMode(HSB, 360, 100, 100); // Should give better range of colour
+    //stroke(100, 149, 237); // Set the stroke colour to blue
     noFill();
     
     scale = 15; // Assign scale
@@ -104,8 +105,9 @@ public class MichaelsVisual extends Visual {
     }
 
     // Define colour within blue to purple range
-    int colour = color(100 + previousAmplitude % 55, 50, 200 + previousAmplitude % 55);
-    stroke(colour); // Apply colour
+    float hue = map(previousAmplitude, 0, 100, 240, 270);
+    int colour = color(hue, 100, 100);
+    stroke(colour);
 
     // Draw terrain mesh with triangle strips
     for (int y = 0; y < rows - 1; y++) {

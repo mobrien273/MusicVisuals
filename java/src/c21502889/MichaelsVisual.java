@@ -15,6 +15,7 @@ public class MichaelsVisual extends Visual {
   float colourChangeThreshold = 0.01f; // Threshold to reduce frequency of colour changes
 
   float scroll = 0; // Variable for terrain scrolling
+  boolean isScrolling = false; // Flag to control when to start scrolling
 
 
   public void settings() {
@@ -49,6 +50,7 @@ public class MichaelsVisual extends Visual {
     if (key == ' ') {
       getAudioPlayer().cue(0);
       getAudioPlayer().play();
+      isScrolling = true; // Start scrolling on space press
     }
 
   }// End keyPressed
@@ -56,8 +58,11 @@ public class MichaelsVisual extends Visual {
   // Method for terrain generation using Perlin noise
   public void terrainGen() {
 
-    scroll -= 0.01; // Decrement scroll on each terrain generation so terrain appears to be moving
-
+    // Check if space has been pressed
+    if (isScrolling == true){
+      scroll -= 0.01; // Decrement scroll on each terrain generation so terrain appears to be moving
+    }
+    
     terrain = new float[cols][rows]; // initialise terrain array
 
     float x_offset = 0; // offset values for Perlin noise

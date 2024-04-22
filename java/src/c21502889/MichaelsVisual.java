@@ -35,9 +35,9 @@ public class MichaelsVisual extends Visual {
     colorMode(HSB, 360, 100, 100); // Should give better range of colour
     noFill();
     
-    scale = 10; // Assign scale
+    scale = 15; // Assign scale
     cols = width / scale + 50; // Number of columns based on the window width (added 50 to avoid gaps)
-    rows = height / scale; // Number of rows based on the window height
+    rows = height / scale + 20; // Number of rows based on the window height
 
     terrainGen(); // Generate terrain
 

@@ -12,20 +12,20 @@ public class MichaelsVisual extends Visual {
   int rows;
 
   float previousAmplitude = 0; // Store previous frame's amplitude
-  float colourChangeThreshold = 0.01f; // Threshold to reduce frequency of colour changes
+  float colourChangeThreshold = 5.0f; // Threshold to reduce frequency of colour changes
 
   float scroll = 0; // Variable for terrain scrolling
   boolean isScrolling = false; // Flag to control when to start scrolling
 
 
   public void settings() {
-    size(800, 800, P3D);
+    size(1000, 1000, P3D);
 
     // Use this to make fullscreen
     // fullScreen();
 
     // Use this to make fullscreen and use P3D for 3D graphics
-    fullScreen(P3D, SPAN);
+    //fullScreen(P3D, SPAN);
 
   }// End settings
 
@@ -70,7 +70,7 @@ public class MichaelsVisual extends Visual {
 
     // Get amplitude data
     float amplitude = getAmplitude();
-    amplitude = amplitude + super.getSmoothedAmplitude() * 600; //amplify amplitude
+    amplitude = amplitude + super.getSmoothedAmplitude() * 650 ; //amplify amplitude
 
     // Create randoms heights for terrain peaks
     for (int y = 0; y < rows; y++) {
@@ -103,7 +103,7 @@ public class MichaelsVisual extends Visual {
     calculateAverageAmplitude();
     terrainGen(); // Modify terrain generation to respond to audio
 
-    translate(width / 2, height / 2 + 100); // Adjust to center terrain and move down slightly
+    translate(width / 2, height / 2 + 100); // Move terrain down
     rotateX(PI / 3); // Bird's eye view
     translate(-(cols - 1) * scale / 2, -(rows - 1) * scale / 2); // Center the terrain on the screen
 
@@ -128,6 +128,6 @@ public class MichaelsVisual extends Visual {
       endShape();
     }
 
-  }
+  }// End draw
 
 }// End MichaelsVisual

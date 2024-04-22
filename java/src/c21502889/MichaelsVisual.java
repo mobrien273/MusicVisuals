@@ -19,13 +19,13 @@ public class MichaelsVisual extends Visual {
 
 
   public void settings() {
-    size(1000, 1000, P3D);
+    size(1920, 1080, P3D);
 
     // Use this to make fullscreen
-    // fullScreen();
+    //fullScreen();
 
     // Use this to make fullscreen and use P3D for 3D graphics
-    //fullScreen(P3D, SPAN);
+    fullScreen(P3D, SPAN);
 
   }// End settings
 
@@ -35,7 +35,7 @@ public class MichaelsVisual extends Visual {
     colorMode(HSB, 360, 100, 100); // Should give better range of colour
     noFill();
     
-    scale = 15; // Assign scale
+    scale = 10; // Assign scale
     cols = width / scale + 50; // Number of columns based on the window width (added 50 to avoid gaps)
     rows = height / scale; // Number of rows based on the window height
 
@@ -70,7 +70,7 @@ public class MichaelsVisual extends Visual {
 
     // Get amplitude data
     float amplitude = getAmplitude();
-    amplitude = amplitude + super.getSmoothedAmplitude() * 650 ; //amplify amplitude
+    amplitude = amplitude + super.getSmoothedAmplitude() * 650; //amplify amplitude
 
     // Create randoms heights for terrain peaks
     for (int y = 0; y < rows; y++) {
@@ -88,7 +88,6 @@ public class MichaelsVisual extends Visual {
   public void draw() {
 
     background(0); // Clear the background
-    //lights(); // Set the default lighting
 
     // Perform FFT analysis
     try{

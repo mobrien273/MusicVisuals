@@ -70,7 +70,7 @@ public class MichaelsVisual extends Visual {
 
     // Get amplitude data
     float amplitude = getAmplitude();
-    amplitude = amplitude + super.getSmoothedAmplitude() * 650; //amplify amplitude
+    amplitude = amplitude + getSmoothedAmplitude() * 650; //amplify amplitude
 
     // Create randoms heights for terrain peaks
     for (int y = 0; y < rows; y++) {

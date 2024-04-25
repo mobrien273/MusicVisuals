@@ -1,6 +1,7 @@
 # Music Visualiser Project
 
 [![YouTube](images/thumbnail.png)](https://youtu.be/A6T_E21GGHo)
+
 Youtube video demonstrating the visualizer.
 
 Name: Michael O'Brien
@@ -25,7 +26,7 @@ The *terrainGen()* method handles terrain generation. The *terrain* array stores
 The *minim* library is used to handle audio playback and analysis. The *getAmplitude()* method is used to get amplitude data for the song being played. As mentioned before the amplitude is used to modulate the terrain height in the terrainGen() method. The amplitude data is also used to shift the colour of the terrain. The program stores the amplitude data from the previous frame in the *previousAmplitude* variable and if it passes a predefined threshold the colour shifts between various hues of blue and purple.
 
 ### Rendering
-The *draw()* method handles the rendering of the terrain. The terrain is drawn using a meshe of traingle strips. A nested loop is used and for each row of the terrain grid the *beginShape* method is called which creates the triangle strips that make up the terrain. Within the second loop vertices are defined for each point on the terrain grid. Each vertex is connected to the previous one in the strip. These vertices make up a row of terrain. *endShape()* is then called and the process begins for the next row in the terrain grid.
+The *draw()* method handles the rendering of the terrain. The terrain is drawn using a mesh of traingle strips. A nested loop is used and for each row of the terrain grid the *beginShape* method is called which creates the triangle strips that make up the terrain. Within the second loop vertices are defined for each point on the terrain grid. Each vertex is connected to the previous one in the strip. These vertices make up a row of terrain. *endShape()* is then called and the process begins for the next row in the terrain grid.
 
 ## What I am most proud of in the assignment
 Despite being basic project I am happy with how the visuals turned out. Through creating this project I learned about Perlin noise and gained a better understanding of Java and the Processing library.

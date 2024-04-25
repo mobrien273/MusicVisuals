@@ -1,7 +1,6 @@
 package c21502889;
 
 import ie.tudublin.Visual;
-import ie.tudublin.VisualException;
 
 public class MichaelsVisual extends Visual {
   int scale; // scale of terrain mesh
@@ -89,16 +88,7 @@ public class MichaelsVisual extends Visual {
 
     background(0); // Clear the background
 
-    // Perform FFT analysis
-    try{
-      calculateFFT();
-      calculateFrequencyBands(); 
-    } catch (VisualException e) {
-      System.err.println("Error: Failed to calculate FFT");
-      return;
-    }
-
-    // Update terrain based on the FFT analysis
+    // Find average amplitude
     calculateAverageAmplitude();
     terrainGen(); // Modify terrain generation to respond to audio
 
